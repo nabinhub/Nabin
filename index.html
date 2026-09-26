@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+    <html lang="jp" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NABIN BHATTARAI Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        starkRed: '#ff1e38',
+                        spiderNeon: '#00f0ff',
+                        starkGold: '#f59e0b',
+                        darkBg: '#050811',
+                        hudPanel: '#0a0f1d'
+                    },
+                    boxShadow: {
+                        'glow-red': '0 0 20px rgba(255, 30, 56, 0.4)',
+                        'glow-cyan': '0 0 20px rgba(0, 240, 255, 0.4)',
+                        'glow-gold': '0 0 20px rgba(245, 158, 11, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #050811;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .hud-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .mono-font {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .hud-border {
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            background: linear-gradient(135deg, rgba(10, 15, 29, 0.85) 0%, rgba(5, 8, 17, 0.95) 100%);
+            box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.05);
+            backdrop-filter: blur(8px);
+        }
+        /* CRT scanline overlay effect */
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.25));
+            background-size: 100% 4px;
+        }
+        /* Interactive Background Canvas Styling */
+        #interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen selection:bg-spiderNeon selection:text-black">
+
+    <!-- Interactive Live Particle Canvas Background -->
+    <canvas id="interactive-bg"></canvas>
+
+    <!-- Scanline Overlay -->
+    <div class="pointer-events-none fixed inset-0 z-10 scanlines opacity-40"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-darkBg/90 backdrop-blur-md border-b border-spiderNeon/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-3 h-3 bg-starkRed rounded-full animate-ping"></div>
+                <div class="hud-font font-black tracking-widest text-sm sm:text-lg">
+                    <span class="text-starkRed">NB</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex space-x-8 mono-font text-xs tracking-wider text-slate-300">
+                <a href="#about" class="hover:text-spiderNeon transition"><span class="text-starkGold">01.</span> PROTOCOL</a>
+                <a href="#capabilities" class="hover:text-spiderNeon transition"><span class="text-starkGold">02.</span> CAPABILITIES</a>
+                <a href="#timeline" class="hover:text-spiderNeon transition"><span class="text-starkGold">03.</span> TIMELINE</a>
+                <a href="#systems" class="hover:text-spiderNeon transition"><span class="text-starkGold">04.</span> SYSTEMS</a>
+                <a href="#contact" class="hover:text-spiderNeon transition"><span class="text-starkGold">05.</span> TRANSMIT</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <div class="hidden lg:block mono-font text-[11px] px-3 py-1 rounded bg-spiderNeon/10 border border-spiderNeon/30 text-spiderNeon">
+                    SYS_STATUS: ONLINE
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content wrapper above background canvas -->
+    <div class="relative z-20">
+
+        <!-- HERO SECTION -->
+        <section class="relative pt-32 pb-20 lg:pt-44 lg:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Bio Info -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 mono-font text-xs px-3 py-1 rounded-full bg-starkRed/10 border border-starkRed/30 text-starkRed">
+                        <span class="w-2 h-2 rounded-full bg-starkRed"></span>
+                        <span>PROTOCOL // IT &amp; CORPORATE SOLUTIONS SPECIALIST</span>
+                    </div>
+                    
+                    <h1 class="hud-font text-4xl sm:text-6xl font-black tracking-tight text-white leading-none">
+                        NABIN <span class="text-transparent bg-clip-text bg-gradient-to-r from-starkRed via-starkGold to-spiderNeon">BHATTARAI</span>
+                    </h1>
+                    
+                    <p class="mono-font text-spiderNeon text-base sm:text-lg tracking-wide">
+                        // Bridging Elite B2B Sales, Advanced Linguistics (JLPT N2 &amp; TOEIC 945), &amp; Next-Gen IT Infrastructure.
+                    </p>
+                    
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                        Corporate Sales &amp; Communications Specialist based in Saitama, Japan. Combining a degree in IT Design Business from Nakano School of Business with hands-on enterprise expertise at SoftBank Corp.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#contact" class="px-8 py-4 rounded-lg hud-font text-xs font-bold uppercase tracking-wider bg-starkRed text-white shadow-glow-red hover:bg-red-600 transition duration-300">
+                            Initiate Contact
+                        </a>
+                        <a href="#timeline" class="px-8 py-4 rounded-lg hud-font text-xs font-bold uppercase tracking-wider bg-black/60 border border-spiderNeon/40 text-spiderNeon hover:bg-spiderNeon/10 transition duration-300">
+                            View Career Timeline
+                        </a>
+                    </div>
+
+                    <!-- Quick Metric Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6">
+                        <div class="hud-border p-3 rounded-lg text-center">
+                            <div class="hud-font text-starkGold text-lg font-bold">JLPT N2</div>
+                            <div class="mono-font text-[10px] text-slate-400">Japanese Proficiency</div>
+                        </div>
+                        <div class="hud-border p-3 rounded-lg text-center">
+                            <div class="hud-font text-spiderNeon text-lg font-bold">TOEIC 945</div>
+                            <div class="mono-font text-[10px] text-slate-400">English Fluency</div>
+                        </div>
+                        <div class="hud-border p-3 rounded-lg text-center">
+                            <div class="hud-font text-starkRed text-lg font-bold">SoftBank</div>
+                            <div class="mono-font text-[10px] text-slate-400">Certified Specialist</div>
+                        </div>
+                        <div class="hud-border p-3 rounded-lg text-center">
+                            <div class="hud-font text-starkGold text-lg font-bold">IT Design</div>
+                            <div class="mono-font text-[10px] text-slate-400">Nakano Grad</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right HUD Graphic Card -->
+                <div class="lg:col-span-5">
+                    <div class="hud-border p-6 sm:p-8 rounded-2xl relative group shadow-glow-cyan">
+                        <div class="absolute -top-3 right-6 bg-spiderNeon text-black mono-font text-xs px-3 py-0.5 rounded font-bold">
+                            AI_SUIT_V2.6
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between border-b border-spiderNeon/20 pb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-lg bg-starkRed/20 border border-starkRed/50 flex items-center justify-center text-starkRed font-bold hud-font">
+                                        NB
+                                    </div>
+                                    <div>
+                                        <div class="hud-font text-sm text-white font-bold">NABIN BHATTARAI</div>
+                                        <div class="mono-font text-xs text-spiderNeon">LOCATION: Saitama, Japan</div>
+                                    </div>
+                                </div>
+                                <div class="w-3 h-3 rounded-full bg-spiderNeon animate-ping"></div>
+                            </div>
+
+                            <div class="space-y-3 mono-font text-xs">
+                                <div class="flex justify-between text-slate-400">
+                                    <span>CORE_SYSTEM:</span>
+                                    <span class="text-white">NABIN O1</span>
+                                </div>
+                                <div class="flex justify-between text-slate-400">
+                                    <span>SPECIALTY:</span>
+                                    <span class="text-white">Enterprise Telecom &amp; IT Systems & Sales</span>
+                                </div>
+                                <div class="flex justify-between text-slate-400">
+                                    <span>CURRENT_BASE:</span>
+                                    <span class="text-white">Softbank Corp. (2025 - Present)</span>
+                                </div>
+                                <div class="flex justify-between text-slate-400">
+                                    <span>SYS_SECURE:</span>
+                                    <span class="text-spiderNeon">VERIFIED</span>
+                                </div>
+                            </div>
+
+                            <!-- Energy Bars -->
+                            <div class="space-y-2 pt-2">
+                                <div class="flex justify-between mono-font text-xs">
+                                    <span class="text-starkGold">B2B SALES &amp; NEGOTIATION</span>
+                                    <span class="text-starkGold">98%</span>
+                                </div>
+                                <div class="w-full bg-black/60 h-2 rounded-full overflow-hidden border border-starkGold/30">
+                                    <div class="bg-gradient-to-r from-starkGold to-spiderNeon h-full w-[98%]"></div>
+                                </div>
+
+                                <div class="flex justify-between mono-font text-xs pt-2">
+                                    <span class="text-spiderNeon">NETWORK &amp; CLOUD ARCHITECTURE</span>
+                                    <span class="text-spiderNeon">92%</span>
+                                </div>
+                                <div class="w-full bg-black/60 h-2 rounded-full overflow-hidden border border-spiderNeon/30">
+                                    <div class="bg-spiderNeon h-full w-[92%]"></div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-spiderNeon/20 text-center">
+                                <span class="mono-font text-[11px] text-slate-400">// READY FOR DEPLOYMENT ACROSS JAPAN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 01: PROFESSIONAL SUMMARY -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="border-l-4 border-starkRed pl-4 mb-12">
+                <div class="mono-font text-xs text-starkRed tracking-widest">// SECTION 01: PROTOCOL &amp; PROFILE</div>
+                <h2 class="hud-font text-2xl sm:text-4xl font-bold text-white mt-1">Professional Summary</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="hud-border p-6 rounded-xl space-y-4 hover:border-spiderNeon transition">
+                    <div class="w-12 h-12 rounded-lg bg-spiderNeon/10 border border-spiderNeon/30 flex items-center justify-center text-spiderNeon font-bold text-xl hud-font">
+                        01
+                    </div>
+                    <h3 class="hud-font text-lg font-bold text-white">Corporate Sales &amp; Relations</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Extensive corporate B2B sales experience at SoftBank Corp.  Accurately analyzing enterprise requirements and architecting collaborative telecommunication solutions.
+                    </p>
+                </div>
+
+                <div class="hud-border p-6 rounded-xl space-y-4 hover:border-starkGold transition">
+                    <div class="w-12 h-12 rounded-lg bg-starkGold/10 border border-starkGold/30 flex items-center justify-center text-starkGold font-bold text-xl hud-font">
+                        02
+                    </div>
+                    <h3 class="hud-font text-lg font-bold text-white">IT &amp; Cloud Integration</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Graduate of Nakano Short-Term University of Business (IT Design Business Course). Certified SoftBank Sales Specialist capable of managing network architectures, cloud services, and security pipelines.
+                    </p>
+                </div>
+
+                <div class="hud-border p-6 rounded-xl space-y-4 hover:border-starkRed transition">
+                    <div class="w-12 h-12 rounded-lg bg-starkRed/10 border border-starkRed/30 flex items-center justify-center text-starkRed font-bold text-xl hud-font">
+                        03
+                    </div>
+                    <h3 class="hud-font text-lg font-bold text-white">Elite Multilingualism</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Native-level fluidity powered by JLPT N2 certification in Japanese and TOEIC 945 points in English, enabling seamless cross-border technical negotiation and multi-cultural coordination.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 02: CAPABILITIES & SKILLS -->
+        <section id="capabilities" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="border-l-4 border-spiderNeon pl-4 mb-12">
+                <div class="mono-font text-xs text-spiderNeon tracking-widest">// SECTION 02: CAPABILITIES &amp; TECH STACK</div>
+                <h2 class="hud-font text-2xl sm:text-4xl font-bold text-white mt-1">Suit Modules &amp; Skills</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Technical Modules -->
+                <div class="hud-border p-8 rounded-2xl space-y-6">
+                    <h3 class="hud-font text-xl font-bold text-white flex items-center space-x-2">
+                        <span class="text-spiderNeon">#</span>
+                        <span>IT &amp; Technical Modules</span>
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mono-font text-xs mb-1">
+                                <span>NETWORK &amp; TELECOMMUNICATIONS (SoftBank Certified)</span>
+                                <span class="text-spiderNeon">98%</span>
+                            </div>
+                            <div class="w-full bg-black/60 h-2 rounded-full border border-spiderNeon/30">
+                                <div class="bg-spiderNeon h-full w-[98%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mono-font text-xs mb-1">
+                                <span>CLOUD INFRASTRUCTURE &amp; SECURITY</span>
+                                <span class="text-starkGold">90%</span>
+                            </div>
+                            <div class="w-full bg-black/60 h-2 rounded-full border border-starkGold/30">
+                                <div class="bg-starkGold h-full w-[90%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mono-font text-xs mb-1">
+                                <span>INTERNET &amp; BUSINESS DESIGN SYSTEMS</span>
+                                <span class="text-starkRed">92%</span>
+                            </div>
+                            <div class="w-full bg-black/60 h-2 rounded-full border border-starkRed/30">
+                                <div class="bg-starkRed h-full w-[92%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mono-font text-xs mb-1">
+                                <span>CORPORATE B2B SALES &amp; RELATIONS</span>
+                                <span class="text-spiderNeon">95%</span>
+                            </div>
+                            <div class="w-full bg-black/60 h-2 rounded-full border border-spiderNeon/30">
+                                <div class="bg-spiderNeon h-full w-[95%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications & Linguistics -->
+                <div class="hud-border p-8 rounded-2xl space-y-6">
+                    <h3 class="hud-font text-xl font-bold text-white flex items-center space-x-2">
+                        <span class="text-starkGold">#</span>
+                        <span>Certifications &amp; Linguistics</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 bg-black/40 border border-spiderNeon/30 rounded-lg">
+                            <div class="hud-font text-spiderNeon font-bold text-base">JLPT N2</div>
+                            <div class="mono-font text-xs text-slate-400 mt-1">Japanese Language Proficiency Test (Dec 2021)</div>
+                        </div>
+                        <div class="p-4 bg-black/40 border border-starkGold/30 rounded-lg">
+                            <div class="hud-font text-starkGold font-bold text-base">TOEIC 945</div>
+                            <div class="mono-font text-xs text-slate-400 mt-1">English Proficiency Certification</div>
+                        </div>
+                        <div class="p-4 bg-black/40 border border-starkRed/30 rounded-lg">
+                            <div class="hud-font text-starkRed font-bold text-base">SoftBank Certified</div>
+                            <div class="mono-font text-xs text-slate-400 mt-1">SoftBank Certified Specialist (Jan 2026)</div>
+                        </div>
+                        <div class="p-4 bg-black/40 border border-spiderNeon/30 rounded-lg">
+                            <div class="hud-font text-white font-bold text-base">Driver Licenses</div>
+                            <div class="mono-font text-xs text-slate-400 mt-1">Automobile &amp; Motorcycle licenses</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 03: MISSION TIMELINE -->
+        <section id="timeline" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="border-l-4 border-starkGold pl-4 mb-12">
+                <div class="mono-font text-xs text-starkGold tracking-widest">// SECTION 03: MISSION TIMELINE</div>
+                <h2 class="hud-font text-2xl sm:text-4xl font-bold text-white mt-1">Education &amp; Career History</h2>
+            </div>
+
+            <div class="space-y-8 border-l-2 border-spiderNeon/30 ml-4 sm:ml-8 pl-6 sm:pl-10">
+                
+                <!-- Item 1 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-starkRed border-4 border-darkBg"></div>
+                    <div class="hud-border p-6 rounded-xl space-y-2">
+                        <span class="mono-font text-xs text-starkRed font-bold">2025.04 - PRESENT</span>
+                        <h3 class="hud-font text-xl font-bold text-white">Softbank Corp. (ソフトバンク株式会社)</h3>
+                        <p class="mono-font text-xs text-spiderNeon">Corporate Sales &amp; Telecommunication Specialist</p>
+                        <p class="text-slate-300 text-sm leading-relaxed pt-2">
+                            Engaged in corporate sales and communication services proposals. Accurately grasping client requirements, collaborating with cross-functional teams to deliver optimal technology solutions, and driving customer success.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-spiderNeon border-4 border-darkBg"></div>
+                    <div class="hud-border p-6 rounded-xl space-y-2">
+                        <span class="mono-font text-xs text-spiderNeon font-bold">2023.04 - 2025.03</span>
+                        <h3 class="hud-font text-xl font-bold text-white">Nakano Short-Term University of Business</h3>
+                        <p class="mono-font text-xs text-starkGold">IT Design Business Course (ITデザインビジネス科)</p>
+                        <p class="text-slate-300 text-sm leading-relaxed pt-2">
+                            Completed comprehensive studies in Internet &amp; Technology, design, business systems, and digital engineering solutions, laying the technical foundation for modern infrastructure management.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-starkGold border-4 border-darkBg"></div>
+                    <div class="hud-border p-6 rounded-xl space-y-2">
+                        <span class="mono-font text-xs text-starkGold font-bold">2017.08 - 2023.03</span>
+                        <h3 class="hud-font text-xl font-bold text-white">India International School in Japan</h3>
+                        <p class="mono-font text-xs text-slate-400">Junior &amp; High-School Education</p>
+                        <p class="text-slate-300 text-sm leading-relaxed pt-2">
+                            Built strong multicultural communication abilities, academic discipline, and advanced multilingual fluency.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-slate-500 border-4 border-darkBg"></div>
+                    <div class="hud-border p-6 rounded-xl space-y-2">
+                        <span class="mono-font text-xs text-slate-400 font-bold">Graduated March 2018</span>
+                        <h3 class="hud-font text-xl font-bold text-white">Alpha English Boarding School</h3>
+                        <p class="mono-font text-xs text-slate-400">Primary Education (Nepal)</p>
+                        <p class="text-slate-300 text-sm leading-relaxed pt-2">
+                            Established fundamental academic disciplines and strong English linguistic foundations.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 04: SYSTEMS SHOWCASE -->
+        <section id="systems" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="border-l-4 border-spiderNeon pl-4 mb-12">
+                <div class="mono-font text-xs text-spiderNeon tracking-widest">// SECTION 04: SYSTEM SHOWCASE</div>
+                <h2 class="hud-font text-2xl sm:text-4xl font-bold text-white mt-1">Projects &amp; Client Solutions</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="hud-border p-6 rounded-xl space-y-4 hover:border-spiderNeon transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="mono-font text-xs text-spiderNeon">B2C / B2B SALES OPS</span>
+                            <span class="w-2 h-2 rounded-full bg-spiderNeon"></span>
+                        </div>
+                        <h3 class="hud-font text-lg font-bold text-white">Corporate Telecom Solutions</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Tailored communication service proposals aligning corporate client business requirements with high-speed network infrastructures.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-spiderNeon/20 flex flex-wrap gap-2 mono-font text-[10px]">
+                        <span class="px-2 py-1 rounded bg-spiderNeon/10 text-spiderNeon">B2B Sales</span>
+                        <span class="px-2 py-1 rounded bg-spiderNeon/10 text-spiderNeon">SoftBank</span>
+                    </div>
+                </div>
+
+                <div class="hud-border p-6 rounded-xl space-y-4 hover:border-starkGold transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="mono-font text-xs text-starkGold">IT INFRASTRUCTURE</span>
+                            <span class="w-2 h-2 rounded-full bg-starkGold"></span>
+                        </div>
+                        <h3 class="hud-font text-lg font-bold text-white">Cloud &amp; Network Security Hub</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Designed simulated cloud topologies and secure routing protocols as part of Nakano School of Business IT design curriculum.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-starkGold/20 flex flex-wrap gap-2 mono-font text-[10px]">
+                        <span class="px-2 py-1 rounded bg-starkGold/10 text-starkGold">Cloud Security</span>
+                        <span class="px-2 py-1 rounded bg-starkGold/10 text-starkGold">IT Design</span>
+                    </div>
+                </div>
+
+                <div class="hud-border p-6 rounded-xl space-y-4 hover:border-starkRed transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="mono-font text-xs text-starkRed">MULTILINGUAL BRIDGE</span>
+                            <span class="w-2 h-2 rounded-full bg-starkRed"></span>
+                        </div>
+                        <h3 class="hud-font text-lg font-bold text-white">Cross-Border Tech Coordination</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Leveraging JLPT N2 and TOEIC 945 mastery to bridge international stakeholders and translate complex technical specifications into business strategies.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-starkRed/20 flex flex-wrap gap-2 mono-font text-[10px]">
+                        <span class="px-2 py-1 rounded bg-starkRed/10 text-starkRed">JLPT N2</span>
+                        <span class="px-2 py-1 rounded bg-starkRed/10 text-starkRed">TOEIC 945</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 05: SECURE TRANSMISSION (CONTACT) -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="border-l-4 border-starkRed pl-4 mb-12">
+                <div class="mono-font text-xs text-starkRed tracking-widest">// SECTION 05: SECURE TRANSMISSION</div>
+                <h2 class="hud-font text-2xl sm:text-4xl font-bold text-white mt-1">Initialize Contact with Nabin</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="hud-border p-8 rounded-2xl space-y-6">
+                        <div class="space-y-2">
+                            <div class="mono-font text-xs text-spiderNeon">☎︎</div>
+                            <div class="hud-font text-white font-bold text-lg">080-****-****</div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="mono-font text-xs text-starkGold">CONNECT via EMAIL. Click Here ↓</div>
+                            <a href="mailto:nabinbhattarai950@gmail.com" class="hud-font text-white font-bold text-sm sm:text-base hover:text-spiderNeon transition">
+                                nabinbhattarai950@gmail.com
+                            </a>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="mono-font text-xs text-starkRed">BASE LOCATION</div>
+                            <div class="hud-font text-white font-bold text-base">Saitama, Japan</div>
+                        </div>
+
+                        <div class="pt-4 border-t border-spiderNeon/20">
+                            <div class="mono-font text-xs text-spiderNeon mb-1">AVAILABILITY STATUS</div>
+                            <p class="text-slate-300 text-sm">Ready for IT sales, network solutions, and corporate communications engineering roles across Japan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formspree Contact Form Column -->
+                <div class="lg:col-span-7 hud-border p-8 rounded-2xl relative">
+                    <div class="absolute top-4 right-4 hud-font text-xs text-spiderNeon">
+                        TERMINAL_ID: #NABIN_024
+                    </div>
+                    
+                    <!-- Formspree Success & Error Feedback Containers -->
+                    <div data-fs-success class="mt-4 text-center hud-font text-xs text-spiderNeon"></div>
+                    <div data-fs-error class="mt-4 text-center hud-font text-xs text-starkRed"></div>
+
+                    <form action="https://formspree.io/f/myeznpbq"
+                        method="POST" id="contact-form" class="space-y-6 pt-4">
+                        <div>
+                            
+                            <label class="block hud-font text-xs text-starkGold mb-2">YOUR_CALL_SIGN / NAME</label>
+                            <input type="text" name="name" id="sender-name" data-fs-field required class="w-full bg-black/60 border border-spiderNeon/40 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-starkRed transition" placeholder="Steve Jobs / Masayoshi Son">
+                            <span data-fs-error="name" class="text-starkRed text-xs mt-1 block"></span>
+                        </div>
+
+                        <div>
+                            <label class="block hud-font text-xs text-starkGold mb-2">FREQUENCY / EMAIL</label>
+                            <input type="email" name="email" id="sender-email" data-fs-field required class="w-full bg-black/60 border border-spiderNeon/40 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-starkRed transition" placeholder="nabin@example.com">
+                            <span data-fs-error="email" class="text-starkRed text-xs mt-1 block"></span>
+                        </div>
+
+                        <div>
+                            <label class="block hud-font text-xs text-starkGold mb-2">TRANSMISSION_MESSAGE</label>
+                            <textarea name="message" id="sender-msg" data-fs-field rows="4" required class="w-full bg-black/60 border border-spiderNeon/40 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-starkRed transition" placeholder="Enter your project proposal or career opportunity details..."></textarea>
+                            <span data-fs-error="message" class="text-starkRed text-xs mt-1 block"></span>
+                        </div>
+
+                        <button type="submit" data-fs-submit-btn class="w-full py-4 rounded-lg bg-gradient-to-r from-starkRed via-starkGold to-spiderNeon text-black font-bold uppercase tracking-wider shadow-glow-red hover:shadow-glow-gold transition duration-300">
+                            Transmit Signal
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-spiderNeon/20 py-8 text-center mono-font text-xs text-slate-500">
+            <div class="max-w-7xl mx-auto px-4">
+                <p>© 2026 NABIN BHATTARAI //  PORTFOLIO. ALL RIGHTS RESERVED.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Interactive Background Particle Script -->
+    <script>
+        const canvas = document.getElementById('interactive-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        window.addEventListener('click', (e) => {
+            // Ripple effect on click: spawn extra particles
+            for (let i = 0; i < 8; i++) {
+                particles.push(new Particle(e.clientX, e.clientY, true));
+            }
+        });
+
+        class Particle {
+            constructor(x, y, isBurst = false) {
+                this.x = x || Math.random() * width;
+                this.y = y || Math.random() * height;
+                this.size = Math.random() * 2 + 1;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
+                
+                if (isBurst) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 2;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                } else {
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                }
+                
+                // Color mix: cyan (spider), red (stark), gold
+                const colors = ['#00f0ff', '#ff1e38', '#f59e0b'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off screen borders
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+
+                // Mouse interactivity attraction/repulsion
+                if (mouse.x !== null && mouse.y !== null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= forceDirectionX * force * 3;
+                        this.y -= forceDirectionY * force * 3;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let numberOfParticles = (width * height) / 12000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        initParticles();
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Connect nearby particles with web lines
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 100) {
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 * (1 - dist / 100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+
+    <!-- Formspree AJAX SDK Integration Scripts -->
+    <script>
+        window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+        formspree('initForm', { formElement: '#contact-form', formId: 'myeznpbq' });
+    </script>
+    <script src="https://formspree.io/f/xeaorpje" defer></script>
+</body>
+</html>
